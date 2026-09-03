@@ -1,26 +1,33 @@
-import { useState } from 'react'
+import React from 'react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
+import Education from './components/Education';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import { useScrollReveal } from './hooks/useScrollReveal';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  // Initialize scroll reveal observer
+  useScrollReveal();
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center bg-slate-900 text-white gap-6">
-      <h1 className="text-4xl font-extrabold text-sky-400 drop-shadow-md">
-        Tailwind v4 + Vite is Working!
-      </h1>
-      
-      <p className="text-slate-400 text-lg">
-        Edit <code className="text-sky-300 bg-slate-800 px-2 py-1 rounded">src/App.jsx</code> to build your layout.
-      </p>
-
-      <button
-        onClick={() => setCount((count) => count + 1)}
-        className="px-6 py-3 bg-sky-500 hover:bg-sky-600 active:scale-95 font-bold rounded-lg transition shadow-lg shadow-sky-500/20"
-      >
-        Count is {count}
-      </button>
+    <div className="min-h-screen bg-neutral-50 text-neutral-900 font-sans selection:bg-neutral-900 selection:text-white flex flex-col">
+      <Navbar />
+      <main className="flex-grow">
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Education />
+        <Contact />
+      </main>
+      <Footer />
     </div>
-  )
+  );
 }
-
-export default App
