@@ -1,5 +1,6 @@
 import React from 'react';
 import { personalDetails } from '../data/portfolio';
+import Currently from './Currently';
 import { Code2 } from 'lucide-react';
 
 export default function About() {
@@ -15,9 +16,9 @@ export default function About() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-start">
           
-          {/* Left Main Editorial Quote/Headline */}
-          <div className="lg:col-span-7 reveal-init">
-            <h2 className="text-fluid-h2 font-bold tracking-tight text-neutral-900 leading-[1.15] mb-6 sm:mb-8 text-left safe-wrap">
+          {/* Left Main Editorial Headline & Paragraphs */}
+          <div className="lg:col-span-7 reveal-init space-y-6">
+            <h2 className="text-fluid-h2 font-bold tracking-tight text-neutral-900 leading-[1.15] text-left safe-wrap">
               "{personalDetails.aboutHeading}"
             </h2>
 
@@ -26,30 +27,29 @@ export default function About() {
                 <p key={idx}>{paragraph}</p>
               ))}
             </div>
-          </div>
 
-          {/* Right Core Focus Card */}
-          <div className="lg:col-span-5 reveal-init mt-4 lg:mt-0">
-            <div className="bg-neutral-50 p-6 sm:p-8 rounded-xl border border-neutral-200">
-              <h3 className="font-mono text-xs font-semibold tracking-wider uppercase text-neutral-500 mb-6 pb-3 border-b border-neutral-200 flex items-center justify-between">
-                <span>Core Focus & Approach</span>
+            {/* Core Focus Pills */}
+            <div className="pt-4">
+              <h3 className="font-mono text-xs font-semibold tracking-wider uppercase text-neutral-500 mb-3 flex items-center gap-2">
                 <Code2 className="w-4 h-4 text-neutral-400 shrink-0" />
+                <span>Core Competencies & Engineering Focus</span>
               </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+              <div className="flex flex-wrap gap-2">
                 {personalDetails.focusAreas.map((area, idx) => (
-                  <div key={idx} className="flex items-center gap-3 text-sm font-medium text-neutral-800">
-                    <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 shrink-0"></span>
-                    <span className="safe-wrap">{area}</span>
-                  </div>
+                  <span
+                    key={idx}
+                    className="font-mono text-xs px-3 py-1.5 bg-neutral-100 text-neutral-800 rounded border border-neutral-200 font-medium"
+                  >
+                    {area}
+                  </span>
                 ))}
               </div>
-
-              <div className="mt-8 pt-6 border-t border-neutral-200 text-xs font-mono text-neutral-500 flex flex-wrap items-center gap-2">
-                <span className="text-neutral-900 font-semibold">{personalDetails.currentCompany}</span>
-                <span>— Current Role</span>
-              </div>
             </div>
+          </div>
+
+          {/* Right Currently Status Card */}
+          <div className="lg:col-span-5 reveal-init mt-2 lg:mt-0">
+            <Currently />
           </div>
 
         </div>

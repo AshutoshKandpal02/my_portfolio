@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { projects } from '../data/portfolio';
-import { ArrowUpRight, Calendar, Check, Image as ImageIcon, Info, X } from 'lucide-react';
+import { ArrowUpRight, Calendar, Check, Image as ImageIcon, Info, X, ExternalLink } from 'lucide-react';
 
 function GithubIcon({ className = "w-4 h-4" }) {
   return (
@@ -15,12 +15,12 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="projects" className="section-padding border-b border-neutral-200/80 bg-white">
+    <section id="projects" className="section-padding border-b border-neutral-200/80 bg-neutral-50">
       <div className="container-custom">
         
         {/* Section Header */}
         <div className="reveal-init flex items-center gap-2 mb-4">
-          <span className="font-mono text-xs font-semibold tracking-widest uppercase text-neutral-400">04 /</span>
+          <span className="font-mono text-xs font-semibold tracking-widest uppercase text-neutral-400">05 /</span>
           <span className="font-mono text-xs font-semibold tracking-widest uppercase text-neutral-600">Selected Work</span>
         </div>
 
@@ -37,20 +37,20 @@ export default function Projects() {
 
         {/* Project Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-
           {projects.map((project) => (
             <div
               key={project.id}
-              className="reveal-init bg-neutral-50 rounded-xl border border-neutral-200 overflow-hidden card-hover-border flex flex-col justify-between group"
+              onClick={() => setSelectedProject(project)}
+              className="reveal-init bg-white rounded-xl border border-neutral-200 overflow-hidden card-hover-border flex flex-col justify-between group cursor-pointer"
             >
-              {/* Card Header & Responsive Visual Media Area */}
+              {/* Responsive Project Visual Media Area */}
               <div>
                 <div className="relative aspect-video w-full bg-neutral-950 p-4 sm:p-6 flex flex-col justify-between overflow-hidden border-b border-neutral-200">
-                  {/* Subtle Grid Background Overlay */}
+                  {/* Subtle Architectural Grid Overlay */}
                   <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:1.75rem_1.75rem] opacity-25"></div>
                   
                   <div className="relative z-10 flex items-center justify-between gap-2">
-                    <span className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-neutral-300 bg-neutral-900/90 px-2.5 py-1 rounded border border-neutral-800 truncate">
+                    <span className="font-mono text-[11px] uppercase tracking-widest text-neutral-300 bg-neutral-900/90 px-2.5 py-1 rounded border border-neutral-800 truncate">
                       {project.type}
                     </span>
                     <span className="font-mono text-lg sm:text-xl font-bold text-neutral-400">
@@ -63,17 +63,17 @@ export default function Projects() {
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover rounded"
+                        className="w-full h-full object-cover rounded transition-transform duration-300 group-hover:scale-105"
                       />
                     ) : (
                       <>
-                        <div className="inline-flex items-center gap-2 text-neutral-400 mb-1.5">
+                        <div className="inline-flex items-center gap-2 text-neutral-400 mb-1">
                           <ImageIcon className="w-4 h-4 opacity-70 shrink-0" />
-                          <span className="font-mono text-[11px] sm:text-xs uppercase tracking-wider">Visual Showcase Placeholder</span>
+                          <span className="font-mono text-[11px] uppercase tracking-wider">PROJECT PREVIEW</span>
                         </div>
                         <p className="text-[11px] text-neutral-500 font-mono">
-                          {/* TODO: Replace with real screenshot when available */}
-                          [ Screenshot / App Mockup slot ]
+                          {/* TODO: Add real project screenshot */}
+                          [ Screenshot coming soon ]
                         </p>
                       </>
                     )}
@@ -91,10 +91,11 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Content Container */}
+                {/* Card Content */}
                 <div className="p-6 sm:p-8">
-                  <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 group-hover:text-neutral-700 transition-colors font-heading mb-2 safe-wrap">
-                    {project.title}
+                  <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 group-hover:text-neutral-700 transition-colors font-heading mb-2 safe-wrap flex items-center justify-between">
+                    <span>{project.title}</span>
+                    <ArrowUpRight className="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
                   </h3>
 
                   <div className="flex items-center gap-2 text-xs font-mono text-neutral-500 mb-4">
@@ -106,10 +107,10 @@ export default function Projects() {
                     {project.description}
                   </p>
 
-                  <ul className="space-y-2.5 mb-6 text-sm text-neutral-700">
+                  <ul className="space-y-2 mb-4 text-xs sm:text-sm text-neutral-700">
                     {project.highlights.map((highlight, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 mt-2 shrink-0"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 mt-1.5 shrink-0"></span>
                         <span className="leading-snug safe-wrap">{highlight}</span>
                       </li>
                     ))}
@@ -117,20 +118,15 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* Card Footer / Case Study Action */}
+              {/* Action Footer */}
               <div className="px-6 sm:px-8 pb-6 pt-3 border-t border-neutral-200/60 mt-auto flex items-center justify-between gap-4">
-                <button
-                  onClick={() => setSelectedProject(project)}
-                  className="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-neutral-900 hover:text-neutral-600 transition-colors py-2 touch-target"
-                >
-                  <span>View Case Study</span>
-                  <ArrowUpRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </button>
+                <span className="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-neutral-900 group-hover:underline">
+                  <span>View Case Study Details</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </span>
 
-                {/* External link placeholder */}
-                <div className="flex items-center gap-3 text-neutral-400">
-                  {/* TODO: Connect real repo URL when available */}
-                  <span className="text-xs font-mono text-neutral-400 hover:text-neutral-700 cursor-pointer p-2 touch-target flex items-center" title="Repo placeholder">
+                <div className="flex items-center gap-2 text-neutral-400">
+                  <span className="text-xs font-mono text-neutral-400 hover:text-neutral-700" title="GitHub Repo Placeholder">
                     <GithubIcon className="w-4 h-4" />
                   </span>
                 </div>
@@ -157,7 +153,7 @@ export default function Projects() {
             <div className="p-5 sm:p-6 border-b border-neutral-200 flex items-center justify-between bg-neutral-50">
               <div>
                 <span className="font-mono text-[11px] text-neutral-400 uppercase tracking-widest block">
-                  Case Study #{selectedProject.id}
+                  Project Case Study #{selectedProject.id}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 font-heading safe-wrap">
                   {selectedProject.title}
@@ -193,7 +189,7 @@ export default function Projects() {
               </div>
 
               <div>
-                <h4 className="font-mono text-xs uppercase tracking-wider text-neutral-500 mb-3">Key Features & Engineering</h4>
+                <h4 className="font-mono text-xs uppercase tracking-wider text-neutral-500 mb-3">What I Built & Key Functionality</h4>
                 <ul className="space-y-2.5">
                   {selectedProject.highlights.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-neutral-800 bg-neutral-50 p-3 rounded border border-neutral-200">
@@ -215,12 +211,12 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* TODO Notice */}
+              {/* Developer Note */}
               <div className="p-4 bg-amber-50 rounded border border-amber-200 text-xs font-mono text-amber-900 flex items-start gap-2.5">
                 <Info className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
                 <div className="safe-wrap">
-                  <span className="font-semibold block mb-1">Developer Note for Portfolio Expansion:</span>
-                  To add project screenshots, live demo links, or GitHub repository URLs, edit the corresponding fields in <code className="bg-amber-100 px-1 py-0.5 rounded">src/data/portfolio.js</code>.
+                  <span className="font-semibold block mb-1">Developer Note for Screenshots & Links:</span>
+                  To add project screenshots, live demo links, or GitHub URLs, edit the corresponding fields in <code className="bg-amber-100 px-1 py-0.5 rounded">src/data/portfolio.js</code>.
                 </div>
               </div>
             </div>
@@ -231,7 +227,7 @@ export default function Projects() {
                 onClick={() => setSelectedProject(null)}
                 className="px-5 py-2.5 text-xs font-mono font-semibold uppercase tracking-wider border border-neutral-300 rounded text-neutral-700 hover:bg-neutral-200 transition-colors touch-target"
               >
-                Close
+                Close Case Study
               </button>
             </div>
 
